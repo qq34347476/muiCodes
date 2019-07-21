@@ -1,0 +1,39 @@
+{
+	"name": "snippets-for-mui",
+	"displayName": "A-snippets-for-mui",
+	"description": "A-snippets-for-mui",
+	"version": "0.0.1",
+	"publisher": "xuedao",
+	"engines": {
+		"vscode": "^1.25.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/qq34347476/muiCodes"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"icon": "icon.png",
+	"keywords": [
+		"mui",
+		"snippets",
+		"xuedao"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/qq34347476/muiCodes/issues"
+	},
+	"contributes": {
+		"snippets": [
+			{
+				"language": "html",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "javascript",
+				"path": "./snippets/javascript.json"
+			}
+		]
+	}
+}

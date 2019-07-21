@@ -1,0 +1,448 @@
+{
+  "mui--初始化插件": {
+    "prefix": ["minit", "mui-csh", "mui-window"],
+    "body": ["mui.init()    //mui插件初始化"],
+    "description": ["初始化插件"]
+  },
+
+  "mui-DOM准备就绪时,执行函数": {
+    "prefix": ["minit", "mui-csh", "mui-window"],
+    "body": ["mui.ready()    //mui插件初始化"],
+    "description": ["初始化插件"]
+  },
+
+  "mui-创建子页面": {
+    "prefix": ["minit", "misubpage", "mui-page", "mui-window"],
+    "body": [
+      "\t//创建子页面",
+      "\tmui.init({",
+      "\t\tsubpages: [{",
+      "\t\t\turl:'${1:list.html}', //子页面HTML地址，支持本地地址和网络地址",
+      "\t\t\tid: '${2:list.html}', //子页面标志(子页面名字例：list:html)",
+      "\t\t\tstyles: {",
+      "\t\t\t\ttop: '${3:45px}', //子页面顶部位置",
+      "\t\t\t\tbottom: '${4:45px}', //子页面底部位置",
+      "\t\t\t\twidth: '${5:100%}', //子页面宽度，默认为100%",
+      "\t\t\t\theight: '${5:100%}', //子页面高度，默认为100%",
+      "\t\t\t\t......",
+      "\t\t\t},",
+      "\t\t\textras: {} //自定义扩展参数，可以用来处理页面间传值",
+      "\t\t}]",
+      "\t});"
+    ],
+    "description": ["创建子页面"]
+  },
+
+  "mui-打开新页面(简易版)": {
+    "prefix": ["minit", "mopenwindow", "mui-window", "mui-page"],
+    "body": [
+      "document.getElementById('${id}').addEventListener('tap', function() {",
+      "\t//打开页面",
+      "\tmui.openWindow({",
+      "\t\turl: '${url}', ",
+      "\t\tid:'${info}'",
+      "\t});",
+      "});"
+    ],
+    "description": ["打开新页面"]
+  },
+
+  "mui-打开新页面(详细配置)": {
+    "prefix": ["minit", "mopenwindow", "mui-window", "mui-page"],
+    "body": [
+      "\tmui.openWindow({",
+      "\t\turl: ${new - page - url},",
+      "\t\tid: ${new - page - id},",
+      "\t\tstyles: {",
+      "\t\t\ttop: ${newpage - top - position}, //新页面顶部位置",
+      "\t\t\tbottom: ${newage - bottom - position}, //新页面底部位置",
+      "\t\t\twidth: ${newpage - width}, //新页面宽度，默认为100%",
+      "\t\t\theight: ${newpage - height}, //新页面高度，默认为100%",
+      "\t\t\t......",
+      "\t\t},",
+      "\t\textras: {",
+      "\t\t\t..... //自定义扩展参数，可以用来处理页面间传值",
+      "\t\t},",
+      "\t\tcreateNew: false, //是否重复创建同样id的webview，默认为false:不重复创建，直接显示",
+      "\t\tshow: {",
+      "\t\t\tautoShow: true, //页面loaded事件发生后自动显示，默认为true",
+      "\t\t\taniShow: ${animationType}, //页面显示动画，默认为”slide-in-right“；",
+      "\t\t\tduration: ${animationTime} //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；",
+      "\t\t},",
+      "\t\twaiting: {",
+      "\t\t\tautoShow: true, //自动显示等待框，默认为true",
+      "\t\t\ttitle: '正在加载...', //等待对话框上显示的提示内容",
+      "\t\t\toptions: {",
+      "\t\t\t\twidth: ${waiting - dialog - widht}, //等待框背景区域宽度，默认根据内容自动计算合适宽度",
+      "\t\t\t\theight: ${waiting - dialog - height}, //等待框背景区域高度，默认根据内容自动计算合适高度",
+      "\t\t\t\t......",
+      "\t\t\t}",
+      "\t\t}",
+      "\t})"
+    ],
+    "description": ["打开新页面(详细配置)"]
+  },
+
+  "mui-打开带原生导航栏的新页面": {
+    "prefix": ["minit", "mopenwindow", "mui-window", "mui-page"],
+    "body": [
+      "\tdocument.getElementById('${id}').addEventListener('tap', function () {",
+      "\t\t//打开带原生导航栏的新页面",
+      "\t\tmui.openWindow({",
+      "\t\t\turl: '${url}',",
+      "\t\t\tid: '${info}',",
+      "\t\t\tstyles: { // 窗口参数 参考5+规范中的WebviewStyle,也就是说WebviewStyle下的参数都可以在此设置",
+      "\t\t\t\ttitleNView: { // 窗口的标题栏控件",
+      "\t\t\t\t\ttitleText: \"标题栏\", // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题",
+      "\t\t\t\t\ttitleColor: \"#000000\", // 字体颜色,颜色值格式为\"#RRGGBB\",默认值为\"#000000\"",
+      "\t\t\t\t\ttitleSize: \"17px\", // 字体大小,默认17px",
+      "\t\t\t\t\tbackgroundColor: \"#F7F7F7\", // 控件背景颜色,颜色值格式为\"#RRGGBB\",默认值为\"#F7F7F7\"",
+      "\t\t\t\t\tprogress: { // 标题栏控件的进度条样式",
+      "\t\t\t\t\t\tcolor: \"#00FF00\", // 进度条颜色,默认值为\"#00FF00\"  ",
+      "\t\t\t\t\t\theight: \"2px\" // 进度条高度,默认值为\"2px\"         ",
+      "\t\t\t\t\t},",
+      "\t\t\t\t\tsplitLine: { // 标题栏控件的底部分割线，类似borderBottom",
+      "\t\t\t\t\t\tcolor: \"#CCCCCC\", // 分割线颜色,默认值为\"#CCCCCC\"  ",
+      "\t\t\t\t\t\theight: \"1px\" // 分割线高度,默认值为\"2px\"",
+      "\t\t\t\t\t}",
+      "\t\t\t\t}",
+      "\t\t\t}",
+      "\t\t});",
+      "\t});"
+    ],
+    "description": ["打开带原生导航栏的新页面"]
+  },
+
+  "mui-预加载(多个)": {
+    "prefix": ["minitpreload", "mui-yjz"],
+    "body": [
+      "\tmui.init({",
+      "\t\tpreloadPages: [{",
+      "\t\t\turl: '${prelaod - page - url}',",
+      "\t\t\tid: '${preload - page - id}',",
+      "\t\t\tstyles: {}, //窗口参数",
+      "\t\t\textras: {}, //自定义扩展参数",
+      "\t\t\tsubpages: [{}, {}] //预加载页面的子页面",
+      "\t\t}],",
+      "\t\tpreloadLimit: 5 //预加载窗口数量限制(一旦超出,先进先出)默认不限制",
+      "\t});"
+    ],
+    "description": ["预加载(多个)"]
+  },
+
+  "mui-预加载(单个)": {
+    "prefix": ["minitpreload", "mui-yjz"],
+    "body": [
+      "\tvar page = mui.preload({",
+      "\t\turl: new - page - url,",
+      "\t\tid: new - page - id, //默认使用当前页面的url作为id",
+      "\t\tstyles: {}, //窗口参数",
+      "\t\textras: {} //自定义扩展参数",
+      "\t});"
+    ],
+    "description": ["预加载(单个)"]
+  },
+
+  "mui-判断预加载是否成功": {
+    "prefix": ["minitpreload", "mui-yjz"],
+    "body": [
+      "\t//A页面中预加载B页面，则在A页面完全加载（可通过setTimeout模拟）后，打印当前应用所有webview，看是否包含B页面的url",
+      "\tmui.plusReady(function () {",
+      "\t\tsetTimeout(function () {",
+      "\t\t\tvar array = plus.webview.all();",
+      "\t\t\tif (array) {",
+      "\t\t\t\tfor (var i = 0, len = array.length; i < len; i++) {",
+      "\t\t\t\t\tconsole.log(array[i].getURL());",
+      "\t\t\t\t}",
+      "\t\t\t}",
+      "\t\t}, 5000)",
+      "\t})"
+    ],
+    "description": ["判断预加载是否成功"]
+  },
+
+  "mui-事件绑定": {
+    "prefix": ["mmon", "mui-on"],
+    "body": [
+      "mui('${1:父盒子}').on('tap','${2:子盒子}',function(){",
+      "\tconsole.log(1);",
+      "})"
+    ],
+    "description": ["mui--事件绑定"]
+  },
+
+  "mui-事件取消": {
+    "prefix": ["mmoff", "mui-off"],
+    "body": ["off()"],
+    "description": ["mui-事件取消"]
+  },
+
+  "mui-事件自动触发": {
+    "prefix": ["mtrigger", "mui-zd"],
+    "body": ["mui.trigger(${1:触发事件的DOM元素},'tap');"],
+    "description": ["mui-事件自动触发"]
+  },
+
+  "mui-手势事件配置": {
+    "prefix": ["minit", "mui-sj"],
+    "body": [
+      "mui.init({",
+      "\tgestureConfig: {",
+      "\t\ttap: true, //单击屏幕\t默认为true",
+      "\t\tdoubletap: true, //双击屏幕\t默认为false",
+      "\t\tlongtap: true, //长按屏幕\t默认为false",
+      "\t\tswipe: true, //滑动\t默认为true",
+      "\t\tdrag: true, //拖动\t默认为true",
+      "\t\thold: false, //按住屏幕\t默认为false，不监听",
+      "\t\trelease: false //离开屏幕\t默认为false，不监听",
+      "\t}",
+      "});"
+    ],
+    "description": ["mui-手势事件配置"]
+  },
+
+  "mui-手势事件": {
+    "prefix": ["mui-sj"],
+    "body": [
+      "${1|tap,doubletap,longtap,hold,release,swipeleft,swiperight,swipeup,swipedown,dragstart,drag,dragend|}"
+    ],
+    "description": ["mui-手势事件"]
+  },
+
+  "mui-下拉刷新(单webview)": {
+    "prefix": ["mui-sx"],
+    "body": [
+      "mui.init({",
+      "\tpullRefresh: {",
+      "\t\tcontainer: \"#refreshContainer\", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等",
+      "\t\tdown: {",
+      "\t\t\tstyle: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式",
+      "\t\t\tcolor: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色",
+      "\t\t\theight: '50px', //可选,默认50px.下拉刷新控件的高度,",
+      "\t\t\trange: '100px', //可选 默认100px,控件可下拉拖拽的范围",
+      "\t\t\toffset: '0px', //可选 默认0px,下拉刷新控件的起始位置",
+      "\t\t\tauto: true, //可选,默认false.首次加载自动上拉刷新一次",
+      "\t\t\tcallback: pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；",
+      "\t\t}",
+      "\t}",
+      "});",
+      "//下面代码放到pulldownRefresh回调函数中",
+      "//注意，加载完新数据后，必须执行如下代码，注意：若为ajax请求，则需将如下代码放置在处理完ajax响应数据之后",
+      "//没有更多内容了，endPulldown 传入true， 不再执行下拉刷新",
+      "mui('#refreshContainer').pullRefresh().endPulldown();"
+    ],
+    "description": ["mui-下拉刷新(单webview)"]
+  },
+
+  "mui-下拉刷新(双webview)": {
+    "prefix": ["mui-sx"],
+    "body": [
+      "两个页面都需要按照这个DOM结构写",
+      "<!--下拉刷新容器-->",
+      "<div id=\"refreshContainer\" class=\"mui-content mui-scroll-wrapper\">",
+      "\t<div class=\"mui-scroll\">",
+      "\t\t<!--数据列表-->",
+      "\t\t<ul class=\"mui-table-view mui-table-view-chevron\">",
+      "\t\t</ul>",
+      "\t</div>",
+      "</div>",
+      "<script>",
+      "\tmui.init({",
+      "\t\tsubpages: [{",
+      "\t\t\turl: pullrefresh - subpage - url, //下拉刷新内容页面地址",
+      "\t\t\tid: pullrefresh - subpage - id, //内容页面标志",
+      "\t\t\tstyles: {",
+      "\t\t\t\ttop: subpage - top - position, //内容页面顶部位置,需根据实际页面布局计算，若使用标准mui导航，顶部默认为48px；",
+      "\t\t\t\t..... //其它参数定义",
+      "\t\t\t}",
+      "\t\t}]",
+      "\tpullRefresh : {",
+      "\t\tcontainer:\"#refreshContainer\",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等",
+      "\t\tdown : {",
+      "\t\t\theight:50,//可选,默认50.触发下拉刷新拖动距离,",
+      "\t\t\tauto: true,//可选,默认false.首次加载自动下拉刷新一次",
+      "\t\t\tcontentdown : \"下拉可以刷新\",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容",
+      "\t\t\tcontentover : \"释放立即刷新\",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容",
+      "\t\t\tcontentrefresh : \"正在刷新...\",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容",
+      "\t\t\tcallback :pullfresh-function //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；",
+      "\t\t}",
+      "\t}",
+      "\t});",
+      "//下面代码放到pulldownRefresh回调函数中",
+      "//注意，加载完新数据后，必须执行如下代码，注意：若为ajax请求，则需将如下代码放置在处理完ajax响应数据之后",
+      "//没有更多内容了，endPulldown 传入true， 不再执行下拉刷新",
+      "mui('#refreshContainer').pullRefresh().endPulldown();",
+      "</script>"
+    ],
+    "description": ["mui-下拉刷新(单webview)"]
+  },
+
+  "mui-上拉加载": {
+    "prefix": ["mui-jz"],
+    "body": [
+      "//上拉加载初始化",
+      "mui.init({",
+      "\tpullRefresh: {",
+      "\t\tcontainer: refreshContainer, //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等",
+      "\t\tup: {",
+      "\t\t\theight: 50, //可选.默认50.触发上拉加载拖动距离",
+      "\t\t\tauto: true, //可选,默认false.自动上拉加载一次",
+      "\t\t\tcontentrefresh: \"正在加载...\", //可选，正在加载状态时，上拉加载控件上显示的标题内容",
+      "\t\t\tcontentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；",
+      "\t\t\tcallback: pullRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；",
+      "\t\t}",
+      "\t}",
+      "});",
+      "function pullRefresh() {",
+      "\t//业务逻辑代码，比如通过ajax从服务器获取新数据；",
+      "\t......",
+      "\t//注意：",
+      "\t//1、加载完新数据后，必须执行如下代码，true表示没有更多数据了：",
+      "\t//2、若为ajax请求，则需将如下代码放置在处理完ajax响应数据之后",
+      "\t......",
+      "\t//是否还有更多数据；若还有更多数据，则传入false; 否则传入true，之后滚动条滚动到底时，将不再显示“上拉显示更多”的提示语，而显示“没有更多数据了”的提示语；",
+      "\tthis.endPullupToRefresh(true | false);",
+      "}"
+    ],
+    "description": ["mui-上拉加载"]
+  },
+
+  "重置上拉加载": {
+    "prefix": ["mui-jz"],
+    "body": [
+      "//pullup-container为在mui.init方法中配置的pullRefresh节点中的container参数；",
+      "//注意：refresh()中需传入true",
+      "mui('#pullup-container').pullRefresh().refresh(true);"
+    ],
+    "description": [
+      "当前类别已无更多数据，但切换到另外一个类别后，应支持继续上拉加载"
+    ]
+  },
+
+  "禁用上拉刷新": {
+    "prefix": ["mui-jz"],
+    "body": [
+      "//pullup-container为在mui.init方法中配置的pullRefresh节点中的container参数；",
+      "mui('#pullup-container').pullRefresh().disablePullupToRefresh();"
+    ],
+    "description": [
+      "列表数据过少时，不想显示“上拉显示更多”、“没有更多数据”的提示语"
+    ]
+  },
+
+  "启用上拉刷新": {
+    "prefix": ["mui-jz"],
+    "body": [
+      "//pullup-container为在mui.init方法中配置的pullRefresh节点中的container参数；",
+      "mui('#pullup-container').pullRefresh().enablePullupToRefresh();"
+    ],
+    "description": [
+      "使用disablePullupToRefresh()方法禁用上拉加载后，可通过enablePullupToRefresh()方法再次启用上拉加载"
+    ]
+  },
+
+  "mui-双击快速回到顶部": {
+    "prefix": ["mui-back"],
+    "body": [
+      "/* ",
+      "双击标题栏，列表快速回滚到顶部",
+      "*/",
+      "var contentWebview = null;",
+      "//监听标题栏的双击事件",
+      "document.querySelector('header').addEventListener('doubletap',function () {",
+      "\tif(contentWebview==null){",
+      "\t\tcontentWebview = plus.webview.currentWebview().children()[0];",
+      "\t}",
+      "\t//内容区滚动到顶部",
+      "\tcontentWebview.evalJS(\"mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)\");",
+      "});"
+    ],
+    "description": ["mui-双击快速回到顶部"]
+  },
+
+  "mui-ajax(完整版)": {
+    "prefix": ["majax"],
+    "body": [
+      "mui.ajax('url', {",
+      "\tdata: {},  // {key:value}",
+      "\tdataType: 'json', // json/xml/html/script/text",
+      "\ttype: 'post', //HTTP请求类型",
+      "\ttimeout: 5000, //超时时间设置为5秒；",
+      "\theaders: {",
+      "\t\t'Content-Type': 'application/json'",
+      "\t},",
+      "\tsuccess: function (data) {",
+      "\t\t//成功后回调函数",
+      "\t},",
+      "\terror: function (xhr, type, errorThrown) { //异常处理；",
+      "\t\t//xhr：xhr实例对象",
+      "\t\t//type：错误描述，可取值：\"timeout\", \"error\", \"abort\", \"parsererror\"、\"null\"",
+      "\t\t//errorThrown：可捕获的异常对象",
+      "\t\tconsole.log(type);",
+      "\t}",
+      "});"
+    ],
+    "description": ["mui-ajax"]
+  },
+
+  "mui-ajax(简化版)": {
+    "prefix": ["majax"],
+    "body": [
+      "//直接使用POST|GET请求方式向服务器发送数据、且不处理timeout和异常",
+      "mui.${1|post,get|}('url', {key: 'value'}, function (data) {",
+      "\t//success的回调函数",
+      "}, 'json');"
+    ],
+    "description": ["mui-ajax(post)"]
+  },
+
+  "mui-ajax(超简化getJSON)": {
+    "prefix": ["majax"],
+    "body": [
+      "//mui.getJSON()方法是在mui.get()方法基础上的更进一步简化，限定返回json格式的数据",
+      "mui.getJSON('url',{key:'value'},function(data){",
+      "\t\t//success的回调函数",
+      "\t}",
+      ");"
+    ],
+    "description": ["mui-ajax(getJSON)"]
+  },
+
+  "mui-警告框": {
+    "prefix": ["mmsg", "mui-tsk"],
+    "body": [
+      "mui.alert(${1:内容}, ${2:标题}, ${3:按钮显示的内容}, ${4:回调函数})"
+    ],
+    "description": ["警告框"]
+  },
+
+  "mui-确认框": {
+    "prefix": ["mmsg", "mui-tsk"],
+    "body": [
+      "mui.confirm(${1:内容}, ${2:标题}, ${3:按钮显示的内容}, ${4:回调函数}) //回调获取用户选择: (res) => {console.log(res)}"
+    ],
+    "description": ["确认框"]
+  },
+
+  "mui-对话输入框": {
+    "prefix": ["mmsg", "mui-tsk"],
+    "body": [
+      "mui.prompt(${1:内容}, ${2:编辑框显示的提示文字}, ${2:标题}, ${3:按钮显示的内容}, ${4:回调函数}  //回调获取用户操作: (res) => {console.log(res))"
+    ],
+    "description": ["对话输入框"]
+  },
+
+  "mui-提示框(自动消失)": {
+    "prefix": ["mmsg", "mui-tsk"],
+    "body": [
+      "mui.toast(${1:提示内容}, {duration: '${2|long,short|}',type: 'div'})"
+    ],
+    "description": ["提示框(自动消失)"]
+  },
+
+  "mui-跳转打开新页面": {
+    "prefix": ["mwindow"],
+    "body": ["\t\tmui.openWindow({url: '${url}' });"],
+    "description": ["mui-跳转打开新页面"]
+  }
+}
