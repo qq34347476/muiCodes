@@ -5,6 +5,32 @@
     "description": ["初始化插件"]
   },
 
+  "mui-自定义mui.back逻辑": {
+    "prefix": ["minit", "mui-back"],
+    "body": [
+        "var backFirst = null",
+        "mui.init({",
+        "  beforeback: function() {",
+        "     //自定义业务逻辑",
+        "     //阻止mui默认点击返回键出发的mui.back()返回上一页，添加两秒内点击两次返回键则退出程序事件，并在第一次点击时弹出提示“再点击一次退出程序”",
+		"if(!backFirst) {",
+		"   backFirst = new Date().getTime();",
+		"   mui.toast('再按一次退出应用');",
+		"   setTimeout(function() {",
+		"       backFirst = null;",
+		"   }, 2000);",
+		"} else {",
+		"   if((new Date()).getTime() - backFirst < 2000) {",
+		"       plus.runtime.quit();",
+		"   }",
+		"}",
+		"return false; //return false时不再执行后退逻辑",
+        "  }",
+        "})"
+    ],
+    "description": ["自定义mui.back回退事件"]
+  },
+
   "mui-DOM准备就绪时,执行函数": {
     "prefix": ["minit", "mui-csh", "mui-window"],
     "body": ["mui.ready()    //mui插件初始化"],
@@ -36,12 +62,10 @@
   "mui-打开新页面(简易版)": {
     "prefix": ["minit", "mopenwindow", "mui-window", "mui-page"],
     "body": [
-      "document.getElementById('${id}').addEventListener('tap', function() {",
-      "\t//打开页面",
-      "\tmui.openWindow({",
-      "\t\turl: '${url}', ",
-      "\t\tid:'${info}'",
-      "\t});",
+      "//打开页面",
+      "mui.openWindow({",
+      "\turl: '${url}', ",
+      "\tid:'${info}'",
       "});"
     ],
     "description": ["打开新页面"]
@@ -444,5 +468,15 @@
     "prefix": ["mwindow"],
     "body": ["\t\tmui.openWindow({url: '${url}' });"],
     "description": ["mui-跳转打开新页面"]
+  },
+
+  "mui回到顶部": {
+      "prefix": ["mScrollTop"],
+      "body": [
+      "mui('#pullrefresh').pullRefresh().scrollTo(0, 0, 100); //滚动到顶部"
+      ],
+      "description": [
+      "mui回到顶部"
+      ]
   }
 }
