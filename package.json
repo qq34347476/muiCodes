@@ -2,10 +2,10 @@
 	"name": "snippets-for-mui",
 	"displayName": "A-snippets-for-mui",
 	"description": "A-snippets-for-mui",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "xuedao",
 	"engines": {
-		"vscode": "^1.25.1"
+		"vscode": "^1.25.0"
 	},
 	"repository": {
 		"type": "git",
